@@ -6,6 +6,7 @@ import Bomb from "./../Timers/BombTimer";
 import Countdown from "./../Timers/Countdown";
 import { GSI } from "../../App";
 import { Match } from "../../api/interfaces";
+import PlantDefuse from "../Timers/PlantDefuse";
 
 function stringToClock(time: string | number, pad = true) {
   if (typeof time === "string") {
@@ -174,20 +175,22 @@ export default class TeamBox extends React.Component<IProps, IState> {
     const right = map.team_ct.orientation === "left" ? map.team_t : map.team_ct;
     const isPlanted = bomb && (bomb.state === "defusing" || bomb.state === "planted");
     const bo = (match && Number(match.matchType.substr(-1))) || 0;
-    let leftTimer: Timer | null = null, rightTimer: Timer | null = null;
+    let Timer: Timer | null = null
     if(defusing.active || planting.active){
       if(defusing.active){
-        if(defusing.side === "left") leftTimer = defusing;
-        else rightTimer = defusing;
+        if(defusing.side === "left") Timer = defusing;
+        else Timer = defusing;
       } else {
-        if(planting.side === "left") leftTimer = planting;
-        else rightTimer = planting;
+        if(planting.side === "left") Timer = planting;
+        else Timer = planting;
       }
     }
     return (
       <>
+        <PlantDefuse timer={Timer} />
         <div id={`matchbar`}>
-          <TeamScore team={left} orientation={"left"} timer={leftTimer} showWin={winState.show && winState.side === "left"} />
+          {/* <PlantDefuse timer={leftTimer} /> */}
+          <TeamScore team={left} orientation={"left"} timer={Timer} showWin={winState.show && winState.side === "left"} />
           <div className={`score left ${left.side}`}>{left.score}</div>
           <div id="timer" className={bo === 0 ? 'no-bo' : ''}>
             <div id={`round_timer_text`} className={isPlanted ? "hide":""}>{time}</div>
@@ -195,7 +198,7 @@ export default class TeamBox extends React.Component<IProps, IState> {
             <Bomb />
           </div>
           <div className={`score right ${right.side}`}>{right.score}</div>
-          <TeamScore team={right} orientation={"right"} timer={rightTimer} showWin={winState.show && winState.side === "right"} />
+          <TeamScore team={right} orientation={"right"} timer={Timer} showWin={winState.show && winState.side === "right"} />
         </div>
       </>
     );

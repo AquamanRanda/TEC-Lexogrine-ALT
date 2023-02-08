@@ -17,6 +17,7 @@ import Overview from "../Overview/Overview";
 import Tournament from "../Tournament/Tournament";
 import Pause from "../PauseTimeout/Pause";
 import Timeout from "../PauseTimeout/Timeout";
+// import PlantDefuse from "../Timers/PlantDefuse";
 
 interface Props {
   game: CSGO,
@@ -93,7 +94,7 @@ export default class Layout extends React.Component<Props, State> {
         <Pause  phase={game.phase_countdowns}/>
         <Timeout map={game.map} phase={game.phase_countdowns} />
         <SeriesBox map={game.map} phase={game.phase_countdowns} match={match} />
-
+        
         <Tournament />
 
         <Observed player={game.player} veto={this.getVeto()} round={game.map.round+1}/>

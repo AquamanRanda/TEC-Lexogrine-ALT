@@ -1,29 +1,29 @@
 .teambox {
     position: fixed;
-    bottom: 80px;
+    bottom: 10px;
     display: flex;
     flex-direction: column;
     opacity: 1;
     transition: opacity 0.75s;
     &.left.CT {
         .player .hp_bar {
-            background: linear-gradient(90deg, rgba(66,83,99,1) 0%, rgba(41,113,159,1) 47%, rgba(19,149,215,1) 100%);
+            background: var(--color-dark-ct);
         }
     }
     &.right.CT {
         .player .hp_bar {
-            background: linear-gradient(270deg, rgba(66,83,99,1) 0%, rgba(41,113,159,1) 47%, rgba(19,149,215,1) 100%);
+            background: var(--color-dark-ct)
 
         }
     }
     &.left.T {
         .player .hp_bar {
-            background: linear-gradient(270deg, rgba(184,127,4,1) 0%, rgba(156,107,7,1) 47%, rgba(110,89,36,1) 100%);
+            background: var(--color-dark-t)
         }
     }
     &.right.T {
         .player .hp_bar {
-            background: linear-gradient(90deg, rgba(184,127,4,1) 0%, rgba(156,107,7,1) 47%, rgba(110,89,36,1) 100%);
+            background: var(--color-dark-t)
         }
     }
     &.hide {
